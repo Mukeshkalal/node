@@ -7,8 +7,11 @@ class Company {
     }
 
     static async findCompanyByEmail(email) {
+        console.log('hello');
+        
         const [company] = await db.execute('SELECT * FROM companies WHERE email = ?', [email]);
-        console.log('DB Query Result:', company);  // Log the database result
+        console.log(company);
+        
         return company[0]; // Ensure this is returning the correct company object
     }
 

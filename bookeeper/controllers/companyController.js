@@ -43,20 +43,16 @@ exports.companyLogin = async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        // Debug log: Check if email and password are coming through correctly
-        console.log({ email, password });
-
         // Validate input
         if (!email || !password) {
             return res.status(400).json({ error: 'Email and password are required' });
         }
 
         // Find the company by email
-        const company = await Company.findCompanyByEmail(email);
-        console.log('Company found:', company);
+        const companyExists = await Company.findCompanyByEmail(email);
 
         // Check if company exists
-        if (!company) {
+        if (!companyExists) {
             return res.status(404).json({ error: 'Company not found' });
         }
 
